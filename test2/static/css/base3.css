@@ -1,0 +1,11 @@
+body{
+    background-image: url(backgroundimage1.jpg);
+}
+.main{
+    width: 50%;
+    margin: 200px auto;
+    color :aliceblue;
+}
+.main input{
+    color : black;
+}
