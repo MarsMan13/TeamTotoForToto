@@ -2,6 +2,7 @@ from django import forms
 from .models import Community_post
 from .models import Member_info
 from django.contrib.auth.models import User
+from .models import Post
 
 
 
@@ -51,6 +52,11 @@ class Login_form(forms.ModelForm):
         }
 
 
+#####
+class Post_form(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('story', 'photo',)
 
 
 

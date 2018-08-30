@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+##
+from django.conf import settings
+
 
 
 class Member_info(models.Model):
@@ -14,12 +17,32 @@ class Member_info(models.Model):
     created_date = models.DateTimeField(
         default=timezone.now)
 
-
     def __str__(self):
         return self.identity
 
-# (사용자이름), 이름, 소개, 전화번호, 성별,
+# (사용자이름    ), 이름, 소개, 전화번호, 성별,
 
+
+#####
+
+def user_path(instance, filename):
+    from random import choice
+    import string
+    arr = [choice(string.ascii_letters) for _ in range(8)]
+    pid = ''.join(arr)
+    extension = filename.split('.')[-1]
+    return '%s/%s.%s' % (instance.owner.username, pid, extension)
+
+
+class Post(models.Model):
+    identity = models.CharField(max_length=200)
+
+    story = models.TextField()
+    photo = models.FileField(null=True)
+    published_date = models.CharField(max_length=20)
+
+    created_date = models.DateTimeField(
+        default=timezone.now)
 
 
 

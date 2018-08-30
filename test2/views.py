@@ -11,6 +11,9 @@ from django.http import HttpResponse
 from .models import Member_info
 from .forms import Member_info_form
 
+from .forms import Post_form
+
+
 
 
 
@@ -78,6 +81,18 @@ def Login(request):
 
 
 
+def post_new(request):
+    if request.method == 'POST':
+        form = Post_form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            #new = form.save(commit=False)
+            #new.user = request.user
+            #new.save()
+            return redirect('home')
+    else:
+        form = Post_form()
+        return render(request, 'test2/post_new.html', {'form': form})
 
 
 
