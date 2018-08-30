@@ -28,9 +28,12 @@ header{
     color : black;
     height: 80px;
     text-decoration: none;
+    font-family: Lobster;
 }
 main{
     padding: 10px;
+    width: 50%;
+    border-right: solid 1px gray;
 }
 nav{
     border-right: solid 1px gray

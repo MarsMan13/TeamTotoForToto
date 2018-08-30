@@ -1,0 +1,16 @@
+{% extends 'test2/base2.html' %}
+   
+
+{% block content %}
+    <div class="member_info_sys">
+     <h3 class="member_info_tag">Member_info</h3>
+     <form class= "member_infoform" method="POST" >{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" class ="save btn btn-default" value="Save"/>
+        <!--<a href={{ "signup" }}><input type="button" class="signup" value="SignUp"/></a>
+    -->    
+   </form>
+</div>
+    
+
+{% endblock %}

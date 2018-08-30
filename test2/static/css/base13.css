@@ -3,8 +3,10 @@ body{
 }
 .main{
     width: 50%;
-    margin: 200px auto;
+    margin-top: 200px;
+    margin-left: 50%;
     color :aliceblue;
+    
 }
 .main input{
     color : black;

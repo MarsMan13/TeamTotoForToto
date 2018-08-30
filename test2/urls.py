@@ -10,8 +10,14 @@ urlpatterns= [
     url(r'^etc/community/post/(?P<pk>\d+)/edit/$', views.community_post_edit, name='community_post_edit'),
 
 
+##############################
+
+
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^member_info/$', views.member_info, name='member_info'),
+
+
     url(r'$', views.Login, name='login'),
     #url(r'^logout/$', views.Logout, name='logout'),
         ]
