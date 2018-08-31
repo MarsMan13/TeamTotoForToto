@@ -11,15 +11,39 @@ class Member_info(models.Model):
     name = models.CharField(max_length=200)
     myinfo = models.TextField()
     callnumber = models.IntegerField
-    
-    #성별 설정 필요
-    
+
     created_date = models.DateTimeField(
         default=timezone.now)
 
     def __str__(self):
         return self.identity
 
+
+##
+class My_unders(models.Model):
+    identity = models.CharField(max_length=200)
+
+    my_unders = models.ManyToManyField(Member_info)
+
+class My_roles(models.Model):
+    identity = models.CharField(max_length=200)
+
+    my_roles = models.ManyToManyField(Member_info)
+
+##
+"""
+class my_follower(models.Model):
+    identity = models.CharField(max_length=200)
+
+    follower = models.ManyToManyField(my_follow)
+    
+
+class my_follow(models.Model):
+"""
+
+
+
+#성별 설정 필요
 # (사용자이름    ), 이름, 소개, 전화번호, 성별,
 
 
