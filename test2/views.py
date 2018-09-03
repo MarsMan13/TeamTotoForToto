@@ -8,22 +8,57 @@ from .forms import Signup_form, Login_form
 from django.contrib.auth import login, authenticate
 
 from django.http import HttpResponse
+
 from .models import Member_info
+from .models import My_role, My_under
+from .models import Post
+
 from .forms import Member_info_form
 
 from .forms import Post_form
 
 
-
-
+"""
+def home(request):
+    if request.user.is_authenticated:
+        posts = Post.objects.filter(published_date__lte= timezone.now()).order_by('published_date')
+        real_posts = []
+        y = []
+        for x in My_role.objects.all():
+            if request.user.username == x.identity:
+                y = x.my_roles.all()
+                break
+        for x in y:
+            for xx in posts:
+                if x.identity == xx.identity:
+                    real_posts.append(xx)
+        return render(request, 'test2/home.html', {'posts:': real_posts})
+    return HttpResponse('잘못된 접근입니다.')
+"""
 
 def home(request):
-    x = User.objects.all()
-    for n in x:
-        if request.user.username == n.username:
-            return render(request, 'test2/home.html', {})
-    return HttpResponse('잘못된 접근입니다.')
+    if request.user.is_authenticated:
+        for x in My_role.objects.all():
+            if request.user.username == x.identity:
+                y = x.my_roles.all()
+                break
+        for x
 
+
+
+        posts = Post.objects.filter(published_date__lte= timezone.now()).order_by('published_date')
+        real_posts = []
+        y = []
+        for x in My_role.objects.all():
+            if request.user.username == x.identity:
+                y = x.my_roles.all()
+                break
+        for x in y:
+            for xx in posts:
+                if x.identity == xx.identity:
+                    real_posts.append(xx)
+        return render(request, 'test2/home.html', {'posts:': real_posts})
+    return HttpResponse('잘못된 접근입니다.')
 
 #################################################
 
@@ -85,7 +120,10 @@ def post_new(request):
     if request.method == 'POST':
         form = Post_form(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.identity = request.user
+            post.created_date = timezone.now()
+            post.save()
             #new = form.save(commit=False)
             #new.user = request.user
             #new.save()

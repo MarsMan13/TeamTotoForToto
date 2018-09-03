@@ -1,6 +1,24 @@
-{% extends 'test2/base1.html' %}
+{% extends 'test2/base2.html' %}
+
+
 
 {% block content %}
-     <h3>Home</h3>
-
+    {% for post in posts %}
+       <div class="post">
+           <p class="post_identity">
+               {{ post.identity }}
+               {{ post.created_date}}
+           </p>
+           <p class="post_photo">
+               {{ post.photo}}
+           </p>
+           <p class="post_stoty">
+               {{ post.story }}
+               {{ post.published_date }}
+           </p>
+           
+           
+       </div>
+       
+    {% endfor %}
 {% endblock %}
