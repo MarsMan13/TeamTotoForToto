@@ -14,20 +14,53 @@ from .models import My_role, My_under
 from .models import Post
 
 from .forms import Member_info_form
-
 from .forms import Post_form
+
+####################################################################
+
+
+def home(request):
+    users = User.objects.all()
+    posts = Post.objects.all()
+    follows = []
+    for x in posts:
+        if x.identity.username == request.user.username:
+            break
+    
+
+
+
+
+def home(request):
+    posts = Post.objects.all()
+    return render(request, 'test2/home.html', {'posts': posts})
+
 
 
 """
 def home(request):
     if request.user.is_authenticated:
-        posts = Post.objects.filter(published_date__lte= timezone.now()).order_by('published_date')
+        #real_posts = []
+        xx = My_role.objects.filter(identity=request.user.username)
+        return HttpResponse(xx)
+"""
+
+
+
+
+"""
+def home(request):
+    if request.user.is_authenticated:
+        posts = Post.objects.filter(created_date__lte=timezone.now()).order_by('published_date')
+        my_role = My_role.objects.filter(identity = request.user.username)
         real_posts = []
+
         y = []
+
         for x in My_role.objects.all():
-            if request.user.username == x.identity:
-                y = x.my_roles.all()
-                break
+            if x.identity == request.user.username:
+                y = x.my_roles
+                return HttpResponse(y)
         for x in y:
             for xx in posts:
                 if x.identity == xx.identity:
@@ -36,6 +69,9 @@ def home(request):
     return HttpResponse('잘못된 접근입니다.')
 """
 
+
+
+"""
 def home(request):
     if request.user.is_authenticated:
         for x in My_role.objects.all():
@@ -59,7 +95,7 @@ def home(request):
                     real_posts.append(xx)
         return render(request, 'test2/home.html', {'posts:': real_posts})
     return HttpResponse('잘못된 접근입니다.')
-
+"""
 #################################################
 
 def signup(request):

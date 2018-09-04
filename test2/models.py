@@ -1,14 +1,10 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-##
-from django.conf import settings
-
 
 
 class Member_info(models.Model):
-    identity = models.CharField(max_length=200)
-
+    identity = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     myinfo = models.TextField()
     callnumber = models.IntegerField
@@ -17,25 +13,27 @@ class Member_info(models.Model):
         default=timezone.now)
 
     def __str__(self):
-        return self.identity
+        return self.identity.username
 
 
 ##
 
 class My_under(models.Model):
-    identity = models.CharField(max_length=200)
+    identity = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     my_unders = models.ManyToManyField(Member_info)
 
     def __str__(self):
-        return self.identity
+        return self.identity.username
+
 
 
 class My_role(models.Model):
-    identity = models.CharField(max_length=200)
+    identity = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     my_roles = models.ManyToManyField(Member_info)
 
     def __str__(self):
-        return self.identity
+        return self.identity.username
+
 
 #성별 설정 필요
 # (사용자이름    ), 이름, 소개, 전화번호, 성별,
@@ -43,6 +41,7 @@ class My_role(models.Model):
 
 #####
 
+"""
 def user_path(instance, filename):
     from random import choice
     import string
@@ -50,10 +49,14 @@ def user_path(instance, filename):
     pid = ''.join(arr)
     extension = filename.split('.')[-1]
     return '%s/%s.%s' % (instance.owner.username, pid, extension)
+"""
+
+def user_path(instance, filename):
+    return
 
 
 class Post(models.Model):
-    identity = models.CharField(max_length=200)
+    identity = models.ForeignKey('auth.User', on_delete=models.CASCADE)
 
     story = models.TextField()
     photo = models.FileField(null=True)

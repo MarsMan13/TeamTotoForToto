@@ -1,6 +1,17 @@
 {% extends 'test2/base2.html' %}
 
 
+{% block style %}
+    <style>
+        .post{
+            color: black;
+        }
+        img{
+            width:100%;
+        }
+    </style>
+{% endblock %}
+
 
 {% block content %}
     {% for post in posts %}
@@ -10,7 +21,10 @@
                {{ post.created_date}}
            </p>
            <p class="post_photo">
-               {{ post.photo}}
+                <img src="../media/{{ post.photo }}" alt="alt">
+           </p>
+           <p>
+               {{ post.photo }}
            </p>
            <p class="post_stoty">
                {{ post.story }}
@@ -19,6 +33,5 @@
            
            
        </div>
-       
     {% endfor %}
 {% endblock %}
