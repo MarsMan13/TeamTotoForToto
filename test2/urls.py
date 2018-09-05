@@ -19,4 +19,6 @@ urlpatterns= [
     url(r'^home/$', views.home, name='home'),
 
     url(r'^profile/$', views.profile, name='profile'),
+
+    #url(r'^following/$', views.following, name='following')
         ]

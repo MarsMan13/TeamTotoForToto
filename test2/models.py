@@ -8,7 +8,6 @@ class Member_info(models.Model):
     name = models.CharField(max_length=200)
     myinfo = models.TextField()
     callnumber = models.IntegerField
-
     created_date = models.DateTimeField(
         default=timezone.now)
 
@@ -78,13 +77,7 @@ class Post(models.Model):
 
 
 
-
-
-
-
-
-
-
+###########################################
 
 class Community_post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -101,8 +94,6 @@ class Community_post(models.Model):
 
     def __str__(self):
         return self.title
-
-
 
 
 # Create your models here.

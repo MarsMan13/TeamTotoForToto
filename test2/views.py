@@ -41,7 +41,10 @@ def home(request):
 
 
 
-def  profile(request):
+
+
+
+def profile(request):
     posts = Post.objects.all()
     my_posts = []
     for x in posts:
@@ -144,7 +147,7 @@ def signup(request):
             return redirect('member_info')
     else:
         form = Signup_form()
-    return render(request, 'test2/signup.html', {'form':form})
+    return render(request, 'test2/signup.html', {'form': form})
 
 
 def member_info(request):
@@ -152,13 +155,12 @@ def member_info(request):
         form = Member_info_form(request.POST)
         if form.is_valid():
             mem = form.save(commit=False)
-            mem.identity = request.user.username
+            mem.identity = User.objects.get(username=request.user.username)
             mem.name = form.cleaned_data['name']
             mem.myinfo = form.cleaned_data['myinfo']
-            #mem.callnumber = form.cleaned_data['callnumber']
             mem.created_date = timezone.now()
             mem.save()
-            return render(request, 'test2/home.html', {})
+            return redirect('home')
     else:
         form = Member_info_form()
     return render(request, 'test2/Member_info.html', {'form': form})
