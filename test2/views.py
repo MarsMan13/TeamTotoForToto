@@ -19,22 +19,52 @@ from .forms import Post_form
 ####################################################################
 
 
+
+
 def home(request):
     users = User.objects.all()
     posts = Post.objects.all()
+    my_roless = My_role.objects.all()
     follows = []
-    for x in posts:
+    for x in my_roless:
         if x.identity.username == request.user.username:
             break
-    
+    for y in x.my_roles.all():
+        follows.append(y.identity.username)
+    posts = Post.objects.all()
+    real_forms = []
+    for x in follows:
+        for y in posts:
+            if y.identity.username == x:
+                real_forms.append(y)
+    return render(request, 'test2/home.html', {'posts': real_forms})
+
+
+
+def  profile(request):
+    posts = Post.objects.all()
+    my_posts = []
+    for x in posts:
+        if x.identity.username == request.user.username:
+            my_posts.append(x)
+    # to my_posts
+    member_infos = Member_info.objects.all()
+    for x in member_infos:
+        if x.identity.username == request.user.username:
+            my_info = x
+    return render(request, 'test2/profile.html', {'my_posts': my_posts, 'my_info': my_info})
 
 
 
 
+
+
+
+"""
 def home(request):
     posts = Post.objects.all()
     return render(request, 'test2/home.html', {'posts': posts})
-
+"""
 
 
 """

@@ -18,4 +18,5 @@ urlpatterns= [
     url(r'^post/$', views.post_new, name='post_new'),
     url(r'^home/$', views.home, name='home'),
 
+    url(r'^profile/$', views.profile, name='profile'),
         ]
