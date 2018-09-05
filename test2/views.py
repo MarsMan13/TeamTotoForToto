@@ -42,6 +42,19 @@ def home(request):
 
 
 
+def following(request):
+    my_roless = My_role.objects.all()
+    for x in my_roless:
+        if x.identity.username == request.user.username:
+            break
+    x.my_roles.add(User.objects.get(username=request.user.username))
+    my_underss = My_under.objects.all()
+    for x in my_underss:
+        if x.identity.username == request.user.username:
+            break
+    x.my_
+
+
 
 
 def profile(request):
@@ -58,7 +71,9 @@ def profile(request):
     return render(request, 'test2/profile.html', {'my_posts': my_posts, 'my_info': my_info})
 
 
-
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'test2/post_detail.html', {'post': post})
 
 
 
@@ -131,6 +146,7 @@ def home(request):
 """
 #################################################
 
+
 def signup(request):
     if request.method == "POST":
         form = Signup_form(request.POST)
@@ -199,9 +215,6 @@ def post_new(request):
     else:
         form = Post_form()
         return render(request, 'test2/post_new.html', {'form': form})
-
-
-
 
 
 

@@ -19,6 +19,7 @@ urlpatterns= [
     url(r'^home/$', views.home, name='home'),
 
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail')
 
     #url(r'^following/$', views.following, name='following')
         ]
